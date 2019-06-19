@@ -153,6 +153,7 @@ CMD     bazel build \
             //tensorflow/tools/pip_package:build_pip_package && \
         ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg
 
+# see https://nvidia.github.io/OpenSeq2Seq/html/installation.html for options
 # CMD     bazel build --config=opt --config=cuda --copt=-mavx --copt=-mavx2 \
 #             --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 --copt=-O3 \
 #             --config=noaws \
