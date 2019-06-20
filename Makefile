@@ -6,6 +6,6 @@ tensorflow_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 		net-mist/tfdevel:0.1
 
 build: tensorflow_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl
-	docker build -t net-mist/tf:0.1 .
+	docker build -t net-mist/tf:1.14.0 .
 
 .SECONDARY:
