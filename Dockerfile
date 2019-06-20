@@ -69,8 +69,9 @@ RUN     pip3 --no-cache-dir install --upgrade \
 RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
 
 # Install tensorflow
-COPY    tensorflow_pkg/tf_nightly_gpu-1.13.1-cp36-cp36m-linux_x86_64.whl .
-RUN     pip3 install tf_nightly_gpu-1.13.1-cp36-cp36m-linux_x86_64.whl && rm tf_nightly_gpu-1.13.1-cp36-cp36m-linux_x86_64.whl
+ARG     TENSORFLOW_WHL=tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl
+COPY    tensorflow_pkg/${TENSORFLOW_WHL} .
+RUN     pip3 install ${TENSORFLOW_WHL} && rm ${TENSORFLOW_WHL}
 
 COPY bashrc /etc/bash.bashrc
 RUN chmod a+rwx /etc/bash.bashrc
