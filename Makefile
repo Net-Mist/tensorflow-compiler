@@ -1,5 +1,5 @@
 tensorflow_pkg/tf_nightly_gpu-1.13.1-cp36-cp36m-linux_x86_64.whl:
-	docker build -t net-mist/tfdevel:0.1 -f devel.Dockerfile . && \
+	docker build -t net-mist/tfdevel:0.1 -f devel.Dockerfile --build-arg CACHEBUST=$(date +%s) . && \
 	mkdir -p tensorflow_pkg && \
 	docker run -it --rm --runtime=nvidia \
 		-v $$(pwd)/tensorflow_pkg:/tensorflow_pkg \
