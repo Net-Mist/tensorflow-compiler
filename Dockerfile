@@ -70,7 +70,8 @@ RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
 
 # Install tensorflow
 ARG     TENSORFLOW_WHL=tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl
-COPY    tensorflow_pkg/${TENSORFLOW_WHL} .
+ARG     TENSORFLOW_PATH=""
+COPY    ${TENSORFLOW_PATH}/${TENSORFLOW_WHL} .
 RUN     pip3 install ${TENSORFLOW_WHL} && rm ${TENSORFLOW_WHL}
 
 COPY bashrc /etc/bash.bashrc

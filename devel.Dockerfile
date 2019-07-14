@@ -143,8 +143,9 @@ WORKDIR /tensorflow_src
 RUN     git checkout v1.14.0
 RUN     ./configure
 
+ARG OPTIONS=""
 CMD     bazel build \
-            --config=opt \
+            ${OPTIONS} \
             --config=cuda \
             --config=noaws \
             --config=nohdfs \
