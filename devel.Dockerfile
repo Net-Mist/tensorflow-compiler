@@ -143,7 +143,7 @@ WORKDIR /tensorflow_src
 RUN     git checkout v1.14.0
 RUN     ./configure
 
-ARG OPTIONS=""
+ARG OPTIONS=1
 CMD     bazel build \
             ${OPTIONS} \
             --config=cuda \

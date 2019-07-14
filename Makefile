@@ -1,6 +1,6 @@
 tensorflow_opt_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 	docker build -t netmist/tfdevel:0.1 -f devel.Dockerfile \
-		--build-arg OPTIONS="--config=opt" \
+		--build-arg OPTIONS="-c opt" \
 		--build-arg CACHE_STOP=$$(date +%s) . && \
 	mkdir -p tensorflow_opt_pkg && \
 	docker run -it --rm --runtime=nvidia \
@@ -14,7 +14,7 @@ build_opt: tensorflow_opt_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl
 
 tensorflow_avx2_avx512f_fma_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 	docker build -t netmist/tfdevel:0.1 -f devel.Dockerfile \
-		--build-arg OPTIONS="--copt=-mavx2 --copt=-mavx512f --copt=-O3 --copt=-mfma " \
+		--build-arg OPTIONS="-c opt --copt=-mavx2 --copt=-mavx512f --copt=-O3 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2" \
 		--build-arg CACHE_STOP=$$(date +%s) . && \
 	mkdir -p tensorflow_avx2_avx512f_fma_pkg && \
 	docker run -it --rm --runtime=nvidia \
@@ -29,7 +29,7 @@ build_avx2_avx512f_fma: tensorflow_avx2_avx512f_fma_pkg/tensorflow-1.14.0-cp36-c
 
 tensorflow_avx2_fma_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 	docker build -t netmist/tfdevel:0.1 -f devel.Dockerfile \
-		--build-arg OPTIONS="--copt=-mavx2 --copt=-O3 --copt=-mfma " \
+		--build-arg OPTIONS="-c opt --copt=-mavx2 --copt=-O3 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2" \
 		--build-arg CACHE_STOP=$$(date +%s) . && \
 	mkdir -p tensorflow_avx2_fma_pkg && \
 	docker run -it --rm --runtime=nvidia \
