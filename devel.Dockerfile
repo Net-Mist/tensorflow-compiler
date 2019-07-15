@@ -143,16 +143,17 @@ WORKDIR /tensorflow_src
 RUN     git checkout v1.14.0
 RUN     ./configure
 
-ARG OPTIONS=1
-CMD     bazel build \
-            ${OPTIONS} \
-            --config=cuda \
-            --config=noaws \
-            --config=nohdfs \
-            --config=noignite \
-            --config=nokafka \
-            //tensorflow/tools/pip_package:build_pip_package && \
-        ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg
+# TODO move in makefile
+# ARG OPTIONS=1
+# CMD     bazel build \
+#             ${OPTIONS} \
+#             --config=cuda \
+#             --config=noaws \
+#             --config=nohdfs \
+#             --config=noignite \
+#             --config=nokafka \
+#             //tensorflow/tools/pip_package:build_pip_package && \
+#         ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg
 
 # see https://nvidia.github.io/OpenSeq2Seq/html/installation.html for options
 # CMD     bazel build --config=opt --config=cuda --copt=-mavx --copt=-mavx2 \
