@@ -6,6 +6,7 @@ tensorflow_opt_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 		-v $$(pwd)/tensorflow_opt_pkg:/tensorflow_pkg \
 		netmist/tfdevel:0.1 /bin/bash -c "bazel build \
             --config=opt \
+			--copt=-march=native \
             --config=cuda \
             --config=noaws \
             --config=nohdfs \

@@ -136,7 +136,7 @@ ENV     TF_NEED_ROCM=0
 ENV     TF_CUDA_CLANG=0
 ENV     GCC_HOST_COMPILER_PATH=/usr/bin/gcc
 ENV     TF_NEED_MPI=0
-ENV     CC_OPT_FLAGS="-march=native -Wno-sign-compare"
+ENV     CC_OPT_FLAGS="-Wno-sign-compare"
 ENV     TF_SET_ANDROID_WORKSPACE=0
 
 WORKDIR /tensorflow_src
