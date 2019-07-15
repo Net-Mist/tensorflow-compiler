@@ -9,3 +9,8 @@ When open a tensorflow session:
 Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
 
 
+TODO
+  - update to ubuntu 19.04 with python 3.7 support
+  - check option --gpu when building pip package
+  - check proco extention on P100 server
+  

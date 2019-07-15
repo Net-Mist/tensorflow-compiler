@@ -4,7 +4,7 @@ tensorflow_opt_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 	mkdir -p tensorflow_opt_pkg && \
 	docker run -it --rm --runtime=nvidia \
 		-v $$(pwd)/tensorflow_opt_pkg:/tensorflow_pkg \
-		netmist/tfdevel:0.1 bazel build \
+		netmist/tfdevel:0.1 /bin/bash -c "bazel build \
             --config=opt \
             --config=cuda \
             --config=noaws \
@@ -12,7 +12,7 @@ tensorflow_opt_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
             --config=noignite \
             --config=nokafka \
             //tensorflow/tools/pip_package:build_pip_package && \
-        ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg
+        ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg"
 
 build_opt: tensorflow_opt_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl
 	docker build -t netmist/tf:1.14.0-opt \
