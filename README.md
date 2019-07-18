@@ -15,3 +15,4 @@ TODO
   - check proco extention on P100 server
   
 This stackoferflow is quite complete :https://stackoverflow.com/questions/41293077/how-to-compile-tensorflow-with-sse4-2-and-avx-instructions
+add -nogcp and implement https://github.com/tensorflow/tensorflow/issues/29617

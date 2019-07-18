@@ -143,7 +143,7 @@ WORKDIR /tensorflow_src
 RUN     git checkout v1.14.0
 RUN     ./configure
 
-# TODO move in makefile
+# moved in makefile
 # ARG OPTIONS=1
 # CMD     bazel build \
 #             ${OPTIONS} \
