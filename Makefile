@@ -85,7 +85,7 @@ tensorflow_avx2_avx512f_fma_6.0_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.wh
         ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg"
 
 build_avx2_avx512f_fma_6.0: tensorflow_avx2_avx512f_fma_6.0_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl
-	docker build -t netmist/tf:1.14.0-avx2-avx512f-fma \
+	docker build -t netmist/tf:1.14.0-avx2-avx512f-fma-6.0 \
 	 --build-arg TENSORFLOW_PATH="tensorflow_avx2_avx512f_fma_6.0_pkg"\
 	 .
 
