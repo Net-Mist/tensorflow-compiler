@@ -71,7 +71,7 @@ ENV CI_BUILD_PYTHON python
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ENV TF_NEED_CUDA 1
 ENV TF_NEED_TENSORRT 1
-ENV TF_CUDA_COMPUTE_CAPABILITIES=6.1,7.0
+ARG TF_CUDA_COMPUTE_CAPABILITIES=6.1,7.0
 ENV TF_CUDA_VERSION=${CUDA}
 ENV TF_CUDNN_VERSION=${CUDNN_MAJOR_VERSION}
 # CACHE_STOP is used to rerun future commands, otherwise cloning tensorflow will be cached and will not pull the most recent version
