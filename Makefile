@@ -28,7 +28,7 @@ tensorflow_avx2_avx512f_fma_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 		-v $$(pwd)/tensorflow_avx2_avx512f_fma_pkg:/tensorflow_pkg \
 		netmist/tfdevel:0.1 /bin/bash -c "bazel build \
             --config=opt \
-			--copt=-mavx2 --copt=-mavx512f --copt=-O3 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 \
+			--copt=-mavx2 --copt=-mavx512f --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 \
             --config=cuda \
             --config=noaws \
             --config=nohdfs \
@@ -50,7 +50,7 @@ tensorflow_avx2_fma_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 		-v $$(pwd)/tensorflow_avx2_fma_pkg:/tensorflow_pkg \
 		netmist/tfdevel:0.1 /bin/bash -c "bazel build \
             --config=opt \
-			--copt=-mavx2 --copt=-O3 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 \
+			--copt=-mavx2 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 \
             --config=cuda \
             --config=noaws \
             --config=nohdfs \
@@ -73,7 +73,7 @@ tensorflow_avx2_avx512f_fma_6.0_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.wh
 		-v $$(pwd)/tensorflow_avx2_avx512f_fma_6.0_pkg:/tensorflow_pkg \
 		netmist/tfdevel:0.1 /bin/bash -c "bazel build \
             --config=opt \
-			--copt=-mavx2 --copt=-mavx512f --copt=-O3 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 \
+			--copt=-mavx2 --copt=-mavx512f --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 \
             --config=cuda \
             --config=noaws \
             --config=nohdfs \

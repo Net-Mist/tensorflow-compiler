@@ -17,8 +17,12 @@ TODO
   - update to ubuntu 19.04 with python 3.7 support
   - check option --gpu when building pip package
   
-This stackoferflow is quite complete :https://stackoverflow.com/questions/41293077/how-to-compile-tensorflow-with-sse4-2-and-avx-instructions
+# Sources:
+This stackoverflow is quite complete :https://stackoverflow.com/questions/41293077/how-to-compile-tensorflow-with-sse4-2-and-avx-instructions
 add -nogcp and implement https://github.com/tensorflow/tensorflow/issues/29617
+
+  - Archlinux wiki: https://git.archlinux.org/svntogit/community.git/plain/trunk/PKGBUILD?h=packages/tensorflow
+  - https://github.com/tensorflow/benchmarks/issues/272
 
 # Benchmark
 
@@ -64,4 +68,14 @@ docker run -it --rm tensorflow/tensorflow:1.14.0-py3 bash
 
 () tensorflow/tensorflow:1.14.0-gpu-py3 CPU
 {'ResNet50': 28.19037078163618, 'InceptionV3': 25.45682005191842, 'InceptionResNetV2': 10.160676573741972, 'VGG16': 12.304525430215644, 'Xception': 14.983201523795456, 'MobileNet': 69.77397260914091, 'MobileNetV2': 53.335922690763766}
+
+
+## FPS on sake
+
+() netmist/tensorflow:1.14.0-avx2-fma
+{'ResNet50': 28.677391170809884, 'InceptionV3': 28.563387605799555, 'InceptionResNetV2': 17.47985183665245, 'VGG16': 118.71391481442377, 'Xception': 48.97231091029714, 'MobileNet': 74.34725974563722, 'MobileNetV2': 60.20276047612835}
+
+() tensorflow opt
+{'ResNet50': 28.973262994183585, 'InceptionV3': 28.91931670432652, 'InceptionResNetV2': 16.844592097207876, 'VGG16': 107.47751538917777, 'Xception': 49.54199096946707, 'MobileNet': 73.67637253661634, 'MobileNetV2': 49.280450584571014}
+
 
