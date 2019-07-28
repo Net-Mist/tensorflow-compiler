@@ -42,7 +42,6 @@ build_avx2_avx512f_fma: tensorflow_avx2_avx512f_fma_pkg/tensorflow-1.14.0-cp36-c
 	 --build-arg TENSORFLOW_PATH="tensorflow_avx2_avx512f_fma_pkg"\
 	 .
 
-
 tensorflow_avx2_fma_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 	docker build -t netmist/tfdevel:0.1 -f devel.Dockerfile \
 		--build-arg CACHE_STOP=$$(date +%s) . && \
@@ -64,7 +63,6 @@ build_avx2_fma: tensorflow_avx2_fma_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_6
 	docker build -t netmist/tensorflow:1.14.0-avx2-fma \
 	 --build-arg TENSORFLOW_PATH="tensorflow_avx2_fma_pkg"\
 	 .
-
 
 tensorflow_avx2_avx512f_fma_6.0_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
 	docker build -t netmist/tfdevel:0.1 -f devel.Dockerfile \
@@ -88,5 +86,17 @@ build_avx2_avx512f_fma_6.0: tensorflow_avx2_avx512f_fma_6.0_pkg/tensorflow-1.14.
 	docker build -t netmist/tensorflow:1.14.0-avx2-avx512f-fma-6.0 \
 	 --build-arg TENSORFLOW_PATH="tensorflow_avx2_avx512f_fma_6.0_pkg"\
 	 .
+
+build_bench:
+	docker build -t $${BASE_IMAGE}_bench \
+		--build-arg BASE_IMAGE=$${BASE_IMAGE} \
+		-f bench.Dockerfile \
+		.
+
+bench:
+	docker run -it --rm --runtime=nvidia -v $$(pwd)/benchmark_src:/bench -v $${HOME}/.keras/models:/root/.keras/models $${BASE_IMAGE}_bench 
+
+bench_cpu:
+	docker run -it --rm --runtime=nvidia -e CUDA_VISIBLE_DEVICES="" -v $$(pwd)/benchmark_src:/bench -v $${HOME}/.keras/models:/root/.keras/models $${BASE_IMAGE}_bench 
 
 .SECONDARY:
