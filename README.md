@@ -34,10 +34,11 @@ make bench
 ```
 
 Size:
-netmist/tensorflow:1.14.0-avx2-avx512f-fma-6.0 | 3.05GB
-netmist/tensorflow:1.14.0-avx2-fma             | 2.87GB
-netmist/tensorflow:1.14.0-avx2-avx512f-fma     | 2.87GB
-tensorflow/tensorflow:1.14.0-gpu-py3           | 3.51GB
+netmist/tensorflow:1.14.0-avx2-avx512f-fma-6.0 | 3.05 GB 
+netmist/tensorflow:1.14.0-avx2-fma             | 2.87 GB
+netmist/tensorflow:1.14.0-avx2-avx512f-fma     | 2.87 GB
+netmist/tensorflow:1.14.0-opt                  | 2.84 GB (5d4776b5e31f)
+tensorflow/tensorflow:1.14.0-gpu-py3           | 3.51 GB
 
 
 docker run -it --rm tensorflow/tensorflow:1.14.0-py3 bash
@@ -92,3 +93,8 @@ docker run -it --rm tensorflow/tensorflow:1.14.0-py3 bash
 
 
 
+# Archlinux opt package
+{'ResNet50': 71.20137163897239, 'InceptionV3': 61.76223628126513, 'InceptionResNetV2': 25.53762950428918, 'VGG16': 106.43553672963958, 'Xception': 92.22267855413496, 'MobileNet': 304.0278997414127, 'MobileNetV2': 230.6046092127421}
+
+# Non opt
+{'ResNet50': 74.5042235479639, 'InceptionV3': 61.52620054552158, 'InceptionResNetV2': 26.44218531407851, 'VGG16': 107.14923930661986, 'Xception': 93.06361650993728, 'MobileNet': 305.9586042520267, 'MobileNetV2': 243.7160540899096}
