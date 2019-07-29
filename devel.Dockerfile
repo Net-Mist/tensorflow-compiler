@@ -29,11 +29,12 @@ ARG CUDNN_MAJOR_VERSION=7
 ARG LIB_DIR_PREFIX=x86_64
 
 # Needed for string substitution 
+# for Cublas, it currently doesn't support 10-1. Probably a bug ?
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         cuda-command-line-tools-${CUDA/./-} \
-        cuda-cublas-dev-${CUDA/./-} \
+        cuda-cublas-dev-10-0 \ 
         cuda-cudart-dev-${CUDA/./-} \
         cuda-cufft-dev-${CUDA/./-} \
         cuda-curand-dev-${CUDA/./-} \

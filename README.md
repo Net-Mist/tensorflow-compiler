@@ -28,7 +28,7 @@ add -nogcp and implement https://github.com/tensorflow/tensorflow/issues/29617
 
 To build the benchmark image run:
 ```bash
-export BASE_IMAGE=netmist/tensorflow:1.14.0-avx2-fma
+export BASE_IMAGE=tensorflow/tensorflow:1.14.0-gpu-py3
 make build_bench
 make bench
 ```
@@ -76,6 +76,19 @@ docker run -it --rm tensorflow/tensorflow:1.14.0-py3 bash
 {'ResNet50': 28.677391170809884, 'InceptionV3': 28.563387605799555, 'InceptionResNetV2': 17.47985183665245, 'VGG16': 118.71391481442377, 'Xception': 48.97231091029714, 'MobileNet': 74.34725974563722, 'MobileNetV2': 60.20276047612835}
 
 () tensorflow opt
-{'ResNet50': 28.973262994183585, 'InceptionV3': 28.91931670432652, 'InceptionResNetV2': 16.844592097207876, 'VGG16': 107.47751538917777, 'Xception': 49.54199096946707, 'MobileNet': 73.67637253661634, 'MobileNetV2': 49.280450584571014}
+{'ResNet50': 45.973262994183585, 'InceptionV3': 28.91931670432652, 'InceptionResNetV2': 16.844592097207876, 'VGG16': 107.47751538917777, 'Xception': 49.54199096946707, 'MobileNet': 73.67637253661634, 'MobileNetV2': 49.280450584571014}
+
+
+() tensorflow opt cpu
+{'ResNet50': 12.118044610491111, 'InceptionV3': 9.693851314381368, 'InceptionResNetV2': 3.9092108732497577, 'VGG16': 8.75470086696838, 'Xception': 9.844244851941703, 'MobileNet': 26.54544443468636, 'MobileNetV2': 18.246935736010172}
+
+
+() tensorflow official
+{'ResNet50': 28.86801080316275, 'InceptionV3': 28.343874925029322, 'InceptionResNetV2': 18.022793536682958, 'VGG16': 121.0920663919959, 'Xception': 49.59775064104259, 'MobileNet': 74.44076773729358, 'MobileNetV2': 48.135939556743956}
+
+
+() tensorflow official cpu
+{'ResNet50': 13.173113207563816, 'InceptionV3': 11.318125467681043, 'InceptionResNetV2': 4.660459205722376, 'VGG16': 8.022583315153415, 'Xception': 9.082312586168614, 'MobileNet': 27.96209788099835, 'MobileNetV2': 18.748385903703827}
+
 
 
