@@ -23,8 +23,8 @@ ARG CUDA=10.0
 FROM nvidia/cuda:${CUDA}-base-ubuntu${UBUNTU_VERSION} as base
 # ARCH and CUDA are specified again because the FROM directive resets ARGs
 # (but their default value is retained if set previously)
-ARG CUDA
-ARG CUDNN=7.4.1.5-1
+ARG CUDA10.1
+ARG CUDNN=7.6.2.24-1
 ARG CUDNN_MAJOR_VERSION=7
 ARG LIB_DIR_PREFIX=x86_64
 
