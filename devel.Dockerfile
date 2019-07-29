@@ -140,6 +140,8 @@ ENV     TF_NEED_MPI=0
 ENV     CC_OPT_FLAGS="-Wno-sign-compare"
 ENV     TF_SET_ANDROID_WORKSPACE=0
 
+ENV     TF_CUDA_PATHS=/lib/x86_64-linux-gnu,/usr,/usr/lib/x86_64-linux-gnu,/usr/local/cuda,/usr/local/cuda-10.1,/usr/local/cuda-10.1,targets/x86_64-linux/lib,/usr/local/cuda-10.0/targets/x86_64-linux/
+
 WORKDIR /tensorflow_src
 RUN     git checkout v1.14.0
 RUN     ./configure
