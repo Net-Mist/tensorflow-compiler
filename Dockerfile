@@ -31,7 +31,7 @@ SHELL   ["/bin/bash", "-c"]
 RUN     apt-get update && apt-get install -y --no-install-recommends \
             build-essential \
             cuda-command-line-tools-${CUDA/./-} \
-            cuda-cublas-${CUDA/./-} \
+            cuda-cublas-10-0 \
             cuda-cufft-${CUDA/./-} \
             cuda-curand-${CUDA/./-} \
             cuda-cusolver-${CUDA/./-} \
@@ -46,7 +46,7 @@ RUN     apt-get update && apt-get install -y --no-install-recommends \
             unzip
 
 RUN     apt-get update && \
-            apt-get install nvinfer-runtime-trt-repo-ubuntu1804-5.0.2-ga-cuda${CUDA} \
+            apt-get install nvinfer-runtime-trt-repo-ubuntu1804-5.0.2-ga-cuda10.0 \
             && apt-get update \
             && apt-get install -y --no-install-recommends libnvinfer5=5.0.2-1+cuda${CUDA} \
             && apt-get clean \
