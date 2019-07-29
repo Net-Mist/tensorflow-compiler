@@ -29,7 +29,7 @@ ARG CUDNN_MAJOR_VERSION=7
 ARG LIB_DIR_PREFIX=x86_64
 
 # Needed for string substitution 
-# for Cublas, it currently doesn't support 10-1. Probably a bug ?
+# for Cublas, there was a change in the naming. See https://devtalk.nvidia.com/default/topic/1047981/cuda-setup-and-installation/cublas-for-10-1-is-missing/
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
@@ -58,6 +58,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     find /usr/local/cuda-${CUDA}/lib64/ -type f -name 'lib*_static.a' -not -name 'libcudart_static.a' -delete && \
     rm /usr/lib/${LIB_DIR_PREFIX}-linux-gnu/libcudnn_static_v7.a
 
+# For libnvinfer it is useless to use CUDA env variable because version of the package directly depend on it
 RUN apt-get update && \
         apt-get install nvinfer-runtime-trt-repo-ubuntu1804-5.0.2-ga-cuda10.0 \
         && apt-get update \
