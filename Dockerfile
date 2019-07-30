@@ -76,3 +76,7 @@ RUN     pip3 install ${TENSORFLOW_WHL} && rm ${TENSORFLOW_WHL}
 
 COPY bashrc /etc/bash.bashrc
 RUN chmod a+rwx /etc/bash.bashrc
+
+# Small bugfix for new CuBlas version : libcublas.so.10 need to exist and its path need to be added to PATH
+RUN cd /usr/local/cuda-10.0/targets/x86_64-linux/lib && ln -s libcublas.so.10.0.130 libcublas.so.10
+ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda-10.0/targets/x86_64-linux/lib
