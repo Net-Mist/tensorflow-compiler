@@ -23,14 +23,8 @@ class KerasBenchmark(ClassificationBenchmark):
 
 def main():
     download_images(100)
-
     fps = {}
-
-    config = tf.ConfigProto()
-    jit_level = tf.OptimizerOptions.ON_1
-    config.graph_options.optimizer_options.global_jit_level = jit_level
-
-    with tf.Session(config=config) as sess:
+    with tf.Session() as sess:
         tf.keras.backend.set_session(sess)
         model = keras.applications.ResNet50(include_top=True, weights='imagenet', input_tensor=None, input_shape=None, pooling=None, classes=1000)
         b = KerasBenchmark("images", 224, 1, model, "ResNet50")

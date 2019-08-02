@@ -28,7 +28,7 @@ add -nogcp and implement https://github.com/tensorflow/tensorflow/issues/29617
 
 To build the benchmark image run:
 ```bash
-export BASE_IMAGE=tensorflow/tensorflow:1.14.0-gpu-py3
+export BASE_IMAGE=netmist/tensorflow:1.14.0-avx2-fma
 make build_bench
 make bench
 ```
@@ -42,6 +42,25 @@ tensorflow/tensorflow:1.14.0-gpu-py3           | 3.51 GB
 
 
 docker run -it --rm tensorflow/tensorflow:1.14.0-py3 bash
+
+## FPS on a computer with Quadro P4000 + I7-7700
+
+| Models            | (1) | (2) |
+|-------------------|:---:|:---:|
+
+(1) Archlinux tensorflow-opt-cuda 1.14.0-2 package
+{'ResNet50': 59.00547387508943, 'InceptionV3': 50.11413912228413, 'InceptionResNetV2': 22.4256804950923, 'VGG16': 78.34706569774471, 'Xception': 67.60028923972799, 'MobileNet': 233.54856905827435, 'MobileNetV2': 172.1870355925941}
+{'ResNet50': 88.07301159622031, 'InceptionV3': 48.50076903667859, 'InceptionResNetV2': 22.959722313199688, 'VGG16': 81.55460786644109, 'Xception': 70.9670068571031, 'MobileNet': 237.47072497032357, 'MobileNetV2': 164.35512462471254}
+
+
+(2) tensorflow/tensorflow:1.14.0-gpu-py3
+{'ResNet50': 78.27896643000801, 'InceptionV3': 46.06719815026825, 'InceptionResNetV2': 21.30824777529307, 'VGG16': 80.59807692390736, 'Xception': 68.6390868349327, 'MobileNet': 195.39085493071426, 'MobileNetV2': 142.89577218935477}
+
+(3) netmist/tensorflow:1.14.0-avx2-fma
+{'ResNet50': 79.96613982574212, 'InceptionV3': 46.01720703271388, 'InceptionResNetV2': 21.32257584706408, 'VGG16': 80.31664582153107, 'Xception': 59.438597496876746, 'MobileNet': 198.77540570532767, 'MobileNetV2': 146.0054679732437}
+
+
+
 
 ## FPS on a computer with GTX1080 + I7-8700K
 

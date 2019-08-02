@@ -12,6 +12,7 @@ tensorflow_opt_pkg/tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl:
             --config=nohdfs \
             --config=noignite \
             --config=nokafka \
+			--config=mkl \
             //tensorflow/tools/pip_package:build_pip_package && \
         ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg"
 
