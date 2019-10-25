@@ -1,10 +1,14 @@
+Current version:
+docker build -t netmist/tfdevel:0.1 -f devel.Dockerfile .
+
+
 # tensorflow-compiler
 Code to compile tensorflow inside docker.
 The structure of the project is explained in [this article](https://net-mist.github.io/tfcompile)
 
 Currently support:
   - opt : build the image with -march=native. You will have all the optimisations supported by your computer
-  - avx2, avx512f and fma: for computer with large amount of CPU cores. Support cuda compute compatibility > 6.0 or > 6.1
+  - avx2, avx512f and fma: for computer with large amount of CPU cores. Support cuda compute compatibility > 6.1
   - avx2 and fma: for most computer
 
 tensorflow/tensorflow:1.14.0-gpu-py3
