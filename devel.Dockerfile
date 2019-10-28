@@ -141,7 +141,7 @@ ENV     TF_NEED_ROCM=0
 ENV     TF_CUDA_CLANG=0
 ENV     GCC_HOST_COMPILER_PATH=/usr/bin/gcc
 ENV     TF_NEED_MPI=0
-ENV     CC_OPT_FLAGS="-march=native -Wno-sign-compare"
+ENV     CC_OPT_FLAGS="-march=haswell -Wno-sign-compare"
 ENV     TF_SET_ANDROID_WORKSPACE=0
 
 ENV     TF_CUDA_PATHS=/lib/x86_64-linux-gnu,/usr,/usr/lib/x86_64-linux-gnu,/usr/local/cuda,/usr/local/cuda-10.1,/usr/local/cuda-10.1,targets/x86_64-linux/lib,/usr/local/cuda-10.0/targets/x86_64-linux/
