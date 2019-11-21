@@ -61,7 +61,7 @@ RUN apt-get update && \
         apt-get install -y --no-install-recommends libnvinfer5=5.1.5-1+cuda${CUDA} \
         libnvinfer-dev=5.1.5-1+cuda${CUDA} \
         && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*;
+        && rm -rf /var/lib/apt/lists/*
 
 # Configure the build for our CUDA configuration.
 ENV CI_BUILD_PYTHON python3.8

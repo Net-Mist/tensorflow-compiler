@@ -18,13 +18,12 @@
 # Please see the Readme.md for these changes
 
 ARG UBUNTU_VERSION=18.04
-
 ARG CUDA=10.1
-FROM nvidia/cuda:${CUDA}-base-ubuntu${UBUNTU_VERSION} as base
+FROM nvidia/cuda:${CUDA}-base-ubuntu${UBUNTU_VERSION}
 # ARCH and CUDA are specified again because the FROM directive resets ARGs
 # (but their default value is retained if set previously)
 ARG CUDA
-ARG CUDNN=7.6.2.24-1
+ARG CUDNN=7.6.4.38-1
 
 # Needed for string substitution
 SHELL   ["/bin/bash", "-c"]
@@ -45,38 +44,45 @@ RUN     apt-get update && apt-get install -y --no-install-recommends \
             software-properties-common \
             unzip
 
-RUN     apt-get update && \
-            apt-get install nvinfer-runtime-trt-repo-ubuntu1804-5.0.2-ga-cuda10.0 \
-            && apt-get update \
-            && apt-get install -y --no-install-recommends libnvinfer5=5.0.2-1+cuda10.0 \
+RUN     apt-get update \
+            && apt-get install -y --no-install-recommends libnvinfer5=5.1.5-1+cuda${CUDA} \
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/*
 
 # For CUDA profiling, TensorFlow requires CUPTI.
-ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+# Link the libcuda stub to the location where tensorflow is searching for it and reconfigure
+# dynamic linker run-time bindings
+RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1 \
+    && echo "/usr/local/cuda/lib64/stubs" > /etc/ld.so.conf.d/z-cuda-stubs.conf \
+    && ldconfig
 
 # See http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
-
-RUN apt-get update && apt-get install -y python3 python3-pip
-
-
-RUN     pip3 --no-cache-dir install --upgrade \
-            pip \
-            setuptools
-
+# Install python 3.8
+RUN add-apt-repository -y ppa:ubuntu-toolchain-r/ppa \
+        && apt install -y python3.8 python3-pip
+RUN python3.8 -m pip --no-cache-dir install --upgrade \
+    pip \
+    setuptools
+    
 # Some TF tools expect a "python" binary
-RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
+RUN ln -s $(which python3.8) /usr/local/bin/python
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    git \
+    wget \
+    python3.8-dev \
+    swig
 
 # Install tensorflow
-ARG     TENSORFLOW_WHL=tensorflow-1.14.0-cp36-cp36m-linux_x86_64.whl
-ARG     TENSORFLOW_PATH=""
+ARG     TENSORFLOW_WHL=tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl
+ARG     TENSORFLOW_PATH="tensorflow_pkg"
 COPY    ${TENSORFLOW_PATH}/${TENSORFLOW_WHL} .
 RUN     pip3 install ${TENSORFLOW_WHL} && rm ${TENSORFLOW_WHL}
 
 COPY bashrc /etc/bash.bashrc
 RUN chmod a+rwx /etc/bash.bashrc
-
-# Small bugfix for new CuBlas version : libcublas.so.10 need to exist and its path need to be added to PATH
-RUN cd /usr/local/cuda-10.0/targets/x86_64-linux/lib && ln -s libcublas.so.10.0.130 libcublas.so.10
-ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda-10.0/targets/x86_64-linux/lib
