@@ -109,6 +109,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip --no-cache-dir install \
     Cython \
+    numpy \
+    && pip --no-cache-dir install \
     Pillow \
     h5py \
     keras_applications \
