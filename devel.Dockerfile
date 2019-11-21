@@ -68,7 +68,7 @@ ENV CI_BUILD_PYTHON python3.8
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
 ENV TF_NEED_CUDA 1
 ENV TF_NEED_TENSORRT 1
-ARG TF_CUDA_COMPUTE_CAPABILITIES=6.1,7.0
+ENV TF_CUDA_COMPUTE_CAPABILITIES=6.1,7.0
 ENV TF_CUDA_VERSION=${CUDA}
 ENV TF_CUDNN_VERSION=${CUDNN_MAJOR_VERSION}
 
@@ -156,7 +156,6 @@ ENV TF_NEED_IGNITE=0
 ENV TF_NEED_ROCM=0
 ENV TF_SET_ANDROID_WORKSPACE=0
 ENV TF_DOWNLOAD_CLANG=0
-ENV TF_NCCL_VERSION=2.4
 ENV GCC_HOST_COMPILER_PATH=/usr/bin/gcc
 ENV TF_IGNORE_MAX_BAZEL_VERSION=1
 ENV TF_CUDA_CLANG=0
@@ -167,35 +166,10 @@ WORKDIR /tensorflow_src
 
 # Patch TF for python 3.8
 COPY patches /tensorflow_src
-# RUN patch -Np1 <python-3.8.patch \
-#     && patch -Np1 <glibc-2.30.patch \
-#     && patch -Np1 <33953.patch \
-#     && patch -Np1 <bazel1.patch
+RUN patch -Np1 <python-3.8.patch \
+    && patch -Np1 <glibc-2.30.patch \
+    && patch -Np1 <33953.patch \
+    && patch -Np1 <bazel1.patch \
+    && patch -Np1 <avx512.patch
 
-# RUN     ./configure
-
-# moved in makefile
-# ARG OPTIONS=1
-# CMD     bazel build \
-#             ${OPTIONS} \
-#             --config=cuda \
-#             --config=noaws \
-#             --config=nohdfs \
-#             --config=noignite \
-#             --config=nokafka \
-#             //tensorflow/tools/pip_package:build_pip_package && \
-#         ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg
-
-# see https://nvidia.github.io/OpenSeq2Seq/html/installation.html for options
-# CMD     bazel build --config=opt --config=cuda --copt=-mavx --copt=-mavx2 \
-#             --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2 --copt=-O3 \
-#             --config=noaws \
-#             --config=nohdfs \
-#             --config=noignite \
-#             --config=nokafka \
-#             --config=v2 \
-#             //tensorflow/tools/pip_package:build_pip_package && \
-        # bazel-bin/tensorflow/tools/pip_package/build_pip_package --gpu --nightly_flag /tensorflow_pkg
-
-
-
+RUN     ./configure
