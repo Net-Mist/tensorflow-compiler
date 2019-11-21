@@ -24,48 +24,49 @@ class KerasBenchmark(ClassificationBenchmark):
 def main():
     download_images(100)
     fps = {}
-    with tf.Session() as sess:
-        tf.keras.backend.set_session(sess)
-        model = keras.applications.ResNet50(include_top=True, weights='imagenet', input_tensor=None, input_shape=None, pooling=None, classes=1000)
-        b = KerasBenchmark("images", 224, 1, model, "ResNet50")
-        fps["ResNet50"] = b.run()
+    
+    # model = keras.applications.ResNet50(include_top=True, weights='imagenet', input_tensor=None, input_shape=None, pooling=None, classes=1000)
+    # model = keras.applications.InceptionV3()
+    model = keras.applications.MobileNetV2()
+    b = KerasBenchmark("images", 224, 1, model, "ResNet50")
+    fps["ResNet50"] = b.run()
     
 
-    with tf.Session() as sess:
-        tf.keras.backend.set_session(sess)
-        model = keras.applications.InceptionV3()
-        b = KerasBenchmark("images", 299, 1, model, "InceptionV3")
-        fps["InceptionV3"] = b.run()
+    # with tf.Session() as sess:
+    #     tf.keras.backend.set_session(sess)
+    #     
+    #     b = KerasBenchmark("images", 299, 1, model, "InceptionV3")
+    #     fps["InceptionV3"] = b.run()
     
-    with tf.Session() as sess:
-        tf.keras.backend.set_session(sess)
-        model = keras.applications.InceptionResNetV2()
-        b = KerasBenchmark("images", 299, 1, model, "InceptionResNetV2")
-        fps["InceptionResNetV2"] = b.run()
+    # with tf.Session() as sess:
+    #     tf.keras.backend.set_session(sess)
+    #     model = keras.applications.InceptionResNetV2()
+    #     b = KerasBenchmark("images", 299, 1, model, "InceptionResNetV2")
+    #     fps["InceptionResNetV2"] = b.run()
     
-    with tf.Session() as sess:
-        tf.keras.backend.set_session(sess)
-        model = keras.applications.VGG16()
-        b = KerasBenchmark("images", 224, 1, model, "VGG16")
-        fps["VGG16"] = b.run()
+    # with tf.Session() as sess:
+    #     tf.keras.backend.set_session(sess)
+    #     model = keras.applications.VGG16()
+    #     b = KerasBenchmark("images", 224, 1, model, "VGG16")
+    #     fps["VGG16"] = b.run()
 
-    with tf.Session() as sess:
-        tf.keras.backend.set_session(sess)
-        model = keras.applications.Xception()
-        b = KerasBenchmark("images", 299, 1, model, "Xception")
-        fps["Xception"] = b.run()
+    # with tf.Session() as sess:
+    #     tf.keras.backend.set_session(sess)
+    #     model = keras.applications.Xception()
+    #     b = KerasBenchmark("images", 299, 1, model, "Xception")
+    #     fps["Xception"] = b.run()
     
-    with tf.Session() as sess:
-        tf.keras.backend.set_session(sess)
-        model = keras.applications.MobileNet()
-        b = KerasBenchmark("images", 224, 1, model, "MobileNet")
-        fps["MobileNet"] = b.run()
+    # with tf.Session() as sess:
+    #     tf.keras.backend.set_session(sess)
+    #     model = keras.applications.MobileNet()
+    #     b = KerasBenchmark("images", 224, 1, model, "MobileNet")
+    #     fps["MobileNet"] = b.run()
 
-    with tf.Session() as sess:
-        tf.keras.backend.set_session(sess)
-        model = keras.applications.MobileNetV2()
-        b = KerasBenchmark("images", 224, 1, model, "MobileNetV2")
-        fps["MobileNetV2"] = b.run()
+    # with tf.Session() as sess:
+    #     tf.keras.backend.set_session(sess)
+    #     model = keras.applications.MobileNetV2()
+    #     b = KerasBenchmark("images", 224, 1, model, "MobileNetV2")
+    #     fps["MobileNetV2"] = b.run()
     
     print(fps)
 

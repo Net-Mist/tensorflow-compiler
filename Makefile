@@ -14,11 +14,12 @@ build: tensorflow_pkg/tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl
 build_bench:
 	docker build -t $${BASE_IMAGE}_bench \
 		--build-arg BASE_IMAGE=$${BASE_IMAGE} \
-		-f bench.Dockerfile \
-		.
+		-f bench.Dockerfile .
 
 bench:
-	docker run -it --rm --runtime=nvidia -v $$(pwd)/benchmark_src:/bench -v $${HOME}/.keras/models:/root/.keras/models $${BASE_IMAGE}_bench 
+	docker run -it --rm --runtime=nvidia \
+		-v $$(pwd)/benchmark_src:/bench \
+		-v $${HOME}/.keras/models:/root/.keras/models $${BASE_IMAGE}_bench
 
 bench_cpu:
 	docker run -it --rm --runtime=nvidia -e CUDA_VISIBLE_DEVICES="" -v $$(pwd)/benchmark_src:/bench -v $${HOME}/.keras/models:/root/.keras/models $${BASE_IMAGE}_bench 
