@@ -1,0 +1,25 @@
+For resons, Tensorflow can't be compiled on avx512 compatible CPU. This patch disable AVX512 optimizations.
+See https://github.com/tensorflow/tensorflow/issues/31187 for more insights.
+
+diff --git a/tensorflow/lite/experimental/ruy/platform.h b/tensorflow/lite/experimental/ruy/platform.h
+index 7a83173acb..dc0f15dba2 100644
+--- a/tensorflow/lite/experimental/ruy/platform.h
++++ b/tensorflow/lite/experimental/ruy/platform.h
+@@ -53,12 +53,12 @@ limitations under the License.
+ // compilation.
+ //
+ // TODO(b/138433137) Select AVX-512 at runtime rather than via compile options.
+-#if defined(__AVX512F__) && defined(__AVX512DQ__) && defined(__AVX512CD__) && \
+-    defined(__AVX512BW__) && defined(__AVX512VL__)
+-#define RUY_DONOTUSEDIRECTLY_AVX512 1
+-#else
++//#if defined(__AVX512F__) && defined(__AVX512DQ__) && defined(__AVX512CD__) && \
++//    defined(__AVX512BW__) && defined(__AVX512VL__)
++//#define RUY_DONOTUSEDIRECTLY_AVX512 1
++//#else
+ #define RUY_DONOTUSEDIRECTLY_AVX512 0
+-#endif
++//#endif
+
+ // Detect APPLE
+ #ifdef __APPLE__
