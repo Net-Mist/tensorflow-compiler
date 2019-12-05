@@ -1,5 +1,5 @@
 tensorflow_pkg/tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl:
-	docker build -t netmist/tfdevel:0.1 -f devel.Dockerfile --build-arg CACHE_STOP=$$(date +%s) . && \
+	docker build -t netmist/tfdevel:0.1_CCC6.0 -f devel.Dockerfile --build-arg CACHE_STOP=$$(date +%s) . && \
 	mkdir -p tensorflow_pkg && \
 	docker run -it --rm --runtime=nvidia \
 		-v $$(pwd)/tensorflow_pkg:/tensorflow_pkg \
@@ -9,7 +9,7 @@ tensorflow_pkg/tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl:
         ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg"
 
 build: tensorflow_pkg/tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl
-	docker build -t netmist/tensorflow:2.0.0 .
+	docker build -t netmist/tensorflow:2.0.0_CCC6.0 .
 
 build_bench:
 	docker build -t $${BASE_IMAGE}_bench \
