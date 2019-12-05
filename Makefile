@@ -3,7 +3,7 @@ tensorflow_pkg/tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl:
 	mkdir -p tensorflow_pkg && \
 	docker run -it --rm --runtime=nvidia \
 		-v $$(pwd)/tensorflow_pkg:/tensorflow_pkg \
-		netmist/tfdevel:0.1 /bin/bash -c "bazel build \
+		netmist/tfdevel:0.1_CCC6.0 /bin/bash -c "bazel build \
             --config=opt \
             //tensorflow/tools/pip_package:build_pip_package && \
         ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tensorflow_pkg"
